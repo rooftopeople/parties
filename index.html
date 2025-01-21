@@ -4,23 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram Login</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Login with Instagram</h1>
+    <h1>Login with Instagram</h1>
+    <!-- Instagram Login Button -->
+    <button id="instagram-login">Login with Instagram</button>
 
-        <!-- Instagram Login Button -->
-        <div class="instagram-login">
-            <a href="https://api.instagram.com/oauth/authorize?client_id=YOUR_APP_ID&redirect_uri=https://your-github-username.github.io/instagram-login-app/instagram-login-callback&scope=user_profile,user_media&response_type=code">
-                <button>Login with Instagram</button>
-            </a>
-        </div>
-
-        <!-- After login message -->
-        <div id="response"></div>
+    <div id="user-info" style="display: none;">
+        <h3>Instagram Username: <span id="username"></span></h3>
+        <button id="save-username">Save Username</button>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
 
+    <div id="media" style="display: none;">
+        <!-- Image or Video will be shown here -->
+        <h3>Check out this content:</h3>
+        <img id="image-content" style="width: 100%; max-width: 600px;" src="" alt="Instagram Content">
+        <!-- Or if you want to show a video -->
+        <!-- <video id="video-content" width="600" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+    </div>
+
+    <script>
+        const clientId = 'YOUR_INSTAGRAM_APP_ID';
+        const redirectUri = 'https://your-github-username.github.io/your-repo-name/'; // GitHub Pages URL
+
+        // Handle Instagram login
+        document.getElementById('instagram-login').addEventListener('click', () => {
+            const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user_profile&response_type=code`;
+            window.location.href = authUrl;
+        });
+
+        // Check if we have a code from Instagram
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        if (code) {
+            fetch(`https://your-render-ap
