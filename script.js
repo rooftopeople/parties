@@ -1,49 +1,38 @@
+
+
+
+
 document.getElementById('instagramForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const instagramName = document.getElementById('instagramName').value;
   const responseElement = document.getElementById('response');
-  const imageContainer = document.getElementById('imageContainer');
 
   if (!instagramName) {
     responseElement.innerText = "Please enter a valid Instagram username.";
     return;
   }
 
-  responseElement.innerText = `Saving Instagram name: ${instagramName}...`;
+  responseElement.innerText = "Approving Instagram name...";
 
   try {
-    // Replace with your GitHub repository details
-    const username = "rooftopeople";
-    const repo = "parties";
-    const path = "instagramNames.txt";
-    const token = "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";
+    // Replace with your SheetDB API endpoint
+    const sheetdbApiUrl = "https://sheetdb.io/api/v1/dq7dca4w9unkw";
 
-    const fileContent = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
-      headers: { Authorization: `token ${token}` }
-    }).then(res => res.json());
-
-    const currentContent = atob(fileContent.content);
-    const updatedContent = currentContent + `\n${instagramName}`;
-
-    const result = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `token ${token}`,
-        'Content-Type': 'application/json'
-      },
+    // Send POST request to SheetDB
+    const response = await fetch(sheetdbApiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: `Add Instagram name: ${instagramName}`,
-        content: btoa(updatedContent),
-        sha: fileContent.sha
-      })
+        data: [{ InstagramName: instagramName }],
+      }),
     });
 
-    if (result.ok) {
-      responseElement.innerText = "Instagram name saved successfully!";
-      imageContainer.classList.remove('hidden');
+    if (response.ok) {
+      responseElement.innerText = `Instagram name "${instagramName}" saved successfully!`;
     } else {
-      throw new Error('Failed to save Instagram name.');
+      const error = await response.json();
+      responseElement.innerText = `Failed to save: ${error.message}`;
     }
   } catch (error) {
     console.error(error);
