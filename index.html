@@ -1,56 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Username Entry</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Name Saver</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Enter Your Instagram Username</h1>
-
-    <!-- Input for Instagram username -->
-    <label for="instagram-username">Instagram Username:</label>
-    <input type="text" id="instagram-username" placeholder="Enter your Instagram username">
-    <button id="submit-username">Submit</button>
-
-    <div id="user-info" style="display: none;">
-        <h3>Instagram Username: <span id="username"></span></h3>
+  <div class="container">
+    <h1>Save Your Instagram Name</h1>
+    <form id="instagramForm">
+      <input type="text" id="instagramName" placeholder="Enter your Instagram username" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+    <div id="imageContainer" class="hidden">
+      <img src="https://raw.githubusercontent.com/rooftopeople/parties/main/image.jpg" alt="Instagram Image">
     </div>
-
-    <div id="media" style="display: none;">
-        <h3>Check out this content:</h3>
-        <!-- Image or Video will be shown here -->
-        <img id="image-content" style="width: 100%; max-width: 600px;" src="" alt="Content">
-        <!-- Or if you want to show a video -->
-        <!-- <video id="video-content" width="600" controls>
-            <source src="" type="video/mp4">
-            Your browser does not support the video tag.
-        </video> -->
-    </div>
-
-    <script>
-        // Handle form submission
-        document.getElementById('submit-username').addEventListener('click', () => {
-            const username = document.getElementById('instagram-username').value.trim();
-
-            if (username) {
-                // Show the username and media content
-                document.getElementById('user-info').style.display = 'block';
-                document.getElementById('username').textContent = username;
-
-                // Show media content (image or video)
-                document.getElementById('media').style.display = 'block';
-
-                // Example: Display an image
-                const imageUrl = 'https://raw.githubusercontent.com/rooftopeople/parties/main/image.jpg'; // Replace with your image URL
-                document.getElementById('image-content').src = imageUrl;
-
-                // Optionally: Display a video (uncomment if you want to use video)
-                // const videoUrl = 'https://github.com/rooftopeople/parties/tree/eeab10eb259a85ff8f134aabfa99ffd5a9053557/video.mp4'; // Replace with your video URL
-                // document.getElementById('video-content').src = videoUrl;
-                // document.getElementById('video-content').style.display = 'block';
-            }
-        });
-    </script>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
+
+
+    
