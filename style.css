@@ -14,16 +14,15 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+button {
+    padding: 10px 20px;
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#qrcode {
-    margin-top: 20px;
-}
-
-h1 {
-    color: #333;
+button:hover {
+    background-color: #2d82d3;
 }
