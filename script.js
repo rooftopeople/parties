@@ -1,8 +1,10 @@
-// Generate QR code that links to the website URL
+// This script can be used for handling Instagram login response
 window.onload = function() {
-    const currentURL = window.location.href;
-    QRCode.toCanvas(document.getElementById('qrcode'), currentURL, function (error) {
-        if (error) console.error(error);
-        console.log("QR code generated!");
-    });
-}
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (code) {
+        document.getElementById('response').innerHTML = "Instagram login successful! Code: " + code;
+        // Here, send the code to your backend (Render) to exchange it for an access token.
+    }
+};
