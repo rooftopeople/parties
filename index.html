@@ -4,20 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Save Instagram Name</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .decorative-image {
+      max-width: 150px; /* Sets a smaller maximum width */
+      height: auto; /* Maintains the aspect ratio */
+      margin: 10px auto 20px; /* Adds spacing and centers the image */
+      display: block; /* Centers the image horizontally */
+      border-radius: 10px; /* Optional: Adds rounded corners */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for style */
+    }
+
+    form {
+      margin: 20px 0;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #response {
+      margin-top: 20px;
+      color: #28a745; /* Success message color */
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Save Instagram Name</h1>
+    <h1>Enter your Instagram Name</h1>
     <!-- Add the GitHub-hosted image -->
     <img src="https://raw.githubusercontent.com/rooftopeople/parties/main/image.jpg" alt="Decorative" class="decorative-image">
 
     <form id="instagramForm">
       <input type="text" id="instagramName" placeholder="Enter Instagram username to validate your age" required>
-      <button type="submit">Save</button>
+      <button type="submit">Continue</button>
     </form>
     <div id="response"></div>
   </div>
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('instagramForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const instagramName = document.getElementById('instagramName').value;
+      const responseElement = document.getElementById('response');
+      if (instagramName.trim() === '') {
+        responseElement.style.color = 'red';
+        responseElement.innerText = 'Please enter a valid Instagram username.';
+      } else {
+        responseElement.style.color = '#28a745';
+        responseElement.innerText = `Thank you! Instagram username "${instagramName}" saved successfully.`;
+      }
+    });
+  </script>
 </body>
 </html>
+
