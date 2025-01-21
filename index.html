@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Image Website</title>
+    <title>Instagram Login</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to My Website</h1>
-        <img src="image.jpg" alt="Image" class="image">
-        <div id="qrcode"></div>
-        <p>Scan the QR code to visit this site again!</p>
+        <h1>Login with Instagram</h1>
+
+        <!-- Instagram Login Button -->
+        <div class="instagram-login">
+            <a href="https://api.instagram.com/oauth/authorize?client_id=YOUR_APP_ID&redirect_uri=https://your-github-username.github.io/instagram-login-app/instagram-login-callback&scope=user_profile,user_media&response_type=code">
+                <button>Login with Instagram</button>
+            </a>
+        </div>
+
+        <!-- After login message -->
+        <div id="response"></div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
