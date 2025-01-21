@@ -29,12 +29,12 @@
     }
 
     .decorative-image {
-      max-width: 150px; /* Sets a smaller maximum width */
-      height: auto; /* Maintains the aspect ratio */
-      margin: 10px auto 20px; /* Adds spacing and centers the image */
-      display: block; /* Centers the image horizontally */
-      border-radius: 10px; /* Optional: Adds rounded corners */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for style */
+      max-width: 150px;
+      height: auto;
+      margin: 10px auto 20px;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     form {
@@ -64,7 +64,7 @@
 
     #response {
       margin-top: 20px;
-      color: #28a745; /* Success message color */
+      color: #28a745;
     }
   </style>
 </head>
@@ -81,19 +81,47 @@
     <div id="response"></div>
   </div>
   <script>
-    document.getElementById('instagramForm').addEventListener('submit', function (e) {
+    const SHEETDB_API_URL = "https://sheetdb.io/api/v1/dq7dca4w9unkw"; // Replace with your SheetDB API endpoint
+
+    document.getElementById('instagramForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const instagramName = document.getElementById('instagramName').value;
       const responseElement = document.getElementById('response');
+
       if (instagramName.trim() === '') {
         responseElement.style.color = 'red';
         responseElement.innerText = 'Please enter a valid Instagram username.';
-      } else {
-        responseElement.style.color = '#28a745';
-        responseElement.innerText = `Thank you! Instagram username "${instagramName}" saved successfully.`;
+        return;
+      }
+
+      responseElement.style.color = '#333';
+      responseElement.innerText = 'Saving your Instagram username...';
+
+      try {
+        const response = await fetch(SHEETDB_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data: [
+              { instagram_name: instagramName }
+            ]
+          })
+        });
+
+        if (response.ok) {
+          responseElement.style.color = '#28a745';
+          responseElement.innerText = `Instagram username "${instagramName}" saved successfully!`;
+        } else {
+          throw new Error('Failed to save Instagram username.');
+        }
+      } catch (error) {
+        console.error(error);
+        responseElement.style.color = 'red';
+        responseElement.innerText = 'An error occurred while saving your Instagram username.';
       }
     });
   </script>
 </body>
 </html>
-
