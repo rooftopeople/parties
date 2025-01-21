@@ -46,12 +46,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-.hidden {
-  display: none;
-}
-
-img {
+#response {
   margin-top: 20px;
-  max-width: 100%;
-  border-radius: 10px;
 }
